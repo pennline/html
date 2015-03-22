@@ -1,9 +1,6 @@
 {
 	"name": "pennline/html",
 	"description": "the html package for the pennline framework",
-	"require": {
-		"php": "5.3.28"
-	},
 	"license": "MIT",
 	"authors": [
 		{
@@ -11,5 +8,13 @@
 			"email": "dan.entous@pennlinepublishing.com"
 		}
 	],
+	"require": {
+		"php": "5.3.28"
+	},
+	"autoload": {
+		"psr-4": {
+			"Pennline\\Html\\": ""
+		}
+	},
 	"minimum-stability": "dev"
 }
