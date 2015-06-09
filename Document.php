@@ -87,7 +87,7 @@ class Document {
 
 	/**
 	 * @param Script $Script
-	 * @param string $placement
+	 * @param string $placement body|head
 	 * @throws Exception
 	 */
 	public function addScript( $Script, $placement = 'body' ) {
