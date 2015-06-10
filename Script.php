@@ -11,6 +11,11 @@ class Script {
 	/**
 	 * @var string
 	 */
+	protected $id;
+
+	/**
+	 * @var string
+	 */
 	protected $src;
 
 	/**
@@ -25,18 +30,30 @@ class Script {
 	 * @return string
 	 */
 	public function __toString() {
-		$result = '';
+		$result = '<script';
 
 		if ( !empty( $this->src ) ) {
-			$result = '<script src="' . $this->src . '"></script>' . PHP_EOL;
-		} elseif ( !empty( $this->content ) ) {
-			$result = '<script>' . $this->content . '</script>' . PHP_EOL;
+			$result .= ' src="' . $this->src . '"';
 		}
+
+		if ( !empty( $this->id ) ) {
+			$result .= ' id="' . $this->id . '"';
+		}
+
+		$result .= '>';
+
+		if ( !empty( $this->content ) ) {
+			$result .= $this->content;
+		}
+
+		$result .= '</script>' . PHP_EOL;
 
 		return $result;
 	}
 
 	protected function init() {
+		$this->content = '';
+		$this->id = '';
 		$this->src = '';
 	}
 
@@ -44,12 +61,17 @@ class Script {
 	 * @param array $options
 	 */
 	protected function populate( array $options ) {
-		if ( isset( $options['src'] ) ) {
-			$this->src = filter_var( $options['src'], FILTER_SANITIZE_STRING );
-		}
-
 		if ( isset( $options['content'] ) ) {
 			$this->content = $options['content'];
 		}
+
+		if ( isset( $options['id'] ) ) {
+			$this->id = filter_var( $options['id'], FILTER_SANITIZE_STRING );
+		}
+
+		if ( isset( $options['src'] ) ) {
+			$this->src = filter_var( $options['src'], FILTER_SANITIZE_STRING );
+		}
 	}
+
 }
